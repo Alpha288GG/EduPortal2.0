@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-panel {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .admin-panel h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .admin-card {
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .admin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .admin-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .admin-login {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h2>Admin Panel</h2>
+            
+            <div id="admin-login" class="admin-login">
+                <h3>Admin Login</h3>
+                <div id="admin-error" class="error-message" style="display: none;"></div>
+                
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-password">Admin Password</label>
+                        <input type="password" id="admin-password" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+            
+            <div id="admin-content" style="display: none;">
+                <div class="admin-panel">
+                    <h3>Teacher Verification Requests</h3>
+                    <div id="verification-requests">
+                        <p>Loading verification requests...</p>
+                    </div>
+                </div>
+                
+                <div class="admin-panel">
+                    <h3>All Users</h3>
+                    <div id="all-users">
+                        <p>Loading users...</p>
+                    </div>
+                </div>
+                
+                <div id="admin-footer" class="admin-panel" style="background-color: #f8f9fa; margin-top: 20px;">
+                    <p id="admin-access-info">Accessing as: Unknown</p>
+                    <button id="admin-logout" class="btn btn-secondary">Logout from Admin</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminLoginForm = document.getElementById('admin-login-form');
+            const adminLogin = document.getElementById('admin-login');
+            const adminContent = document.getElementById('admin-content');
+            const adminError = document.getElementById('admin-error');
+            const verificationRequests = document.getElementById('verification-requests');
+            const allUsers = document.getElementById('all-users');
+            
+            // Check if user has admin access from admin-access page
+            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+            const isModerator = sessionStorage.getItem('isModerator') === 'true';
+            const adminRole = sessionStorage.getItem('adminRole');
+            const moderatorRole = sessionStorage.getItem('moderatorRole');
+            
+            // Update admin access info
+            const adminAccessInfo = document.getElementById('admin-access-info');
+            if (adminAccessInfo) {
+                if (isAdmin) {
+                    adminAccessInfo.textContent = `Accessing as: ${adminRole}`;
+                } else if (isModerator) {
+                    adminAccessInfo.textContent = `Accessing as: ${moderatorRole}`;
+                }
+            }
+            
+            // Handle admin logout
+            const adminLogout = document.getElementById('admin-logout');
+            if (adminLogout) {
+                adminLogout.addEventListener('click', function() {
+                    // Clear admin session data
+                    sessionStorage.removeItem('isAdmin');
+                    sessionStorage.removeItem('adminRole');
+                    sessionStorage.removeItem('isModerator');
+                    sessionStorage.removeItem('moderatorRole');
+                    
+                    // Redirect to home
+                    window.location.href = 'index.html';
+                });
+            }
+            
+            // If user has admin access, show admin content directly
+            if (isAdmin || isModerator) {
+                adminLogin.style.display = 'none';
+                adminContent.style.display = 'block';
+                
+                // Load data
+                loadVerificationRequests();
+                loadAllUsers();
+            }
+            
+            // Admin password - in a real app, this would be stored securely
+            const ADMIN_PASSWORD = 'admin123';
+            
+            if (adminLoginForm) {
+                adminLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const password = document.getElementById('admin-password').value;
+                    
+                    if (password === ADMIN_PASSWORD) {
+                        // Hide login, show content
+                        adminLogin.style.display = 'none';
+                        adminContent.style.display = 'block';
+                        
+                        // Load data
+                        loadVerificationRequests();
+                        loadAllUsers();
+                    } else {
+                        showError('Invalid admin password');
+                    }
+                });
+            }
+            
+            function showError(message) {
+                if (adminError) {
+                    adminError.textContent = message;
+                    adminError.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        adminError.style.display = 'none';
+                    }, 3000);
+                }
+            }
+            
+            function loadVerificationRequests() {
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                // Filter unverified teachers
+                const unverifiedTeachers = users.filter(user => 
+                    user.role === 'teacher' && user.verified !== true
+                );
+                
+                if (unverifiedTeachers.length === 0) {
+                    verificationRequests.innerHTML = '<p>No pending verification requests.</p>';
+                    return;
+                }
+                
+                // Create HTML for each request
+                let html = '';
+                unverifiedTeachers.forEach(user => {
+                    html += `
+                        <div class="admin-card" data-email="${user.email}">
+                            <div class="admin-card-header">
+                                <h4>${user.name}</h4>
+                                <div class="admin-card-actions">
+                                    <button class="btn btn-primary btn-sm verify-user" data-email="${user.email}">
+                                        <i class="fas fa-check"></i> Verify
+                                    </button>
+                                    <button class="btn btn-danger btn-sm reject-user" data-email="${user.email}">
+                                        <i class="fas fa-times"></i> Reject
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Registered:</strong> ${new Date(user.registeredOn).toLocaleDateString()}</p>
+                        </div>
+                    `;
+                });
+                
+                verificationRequests.innerHTML = html;
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.verify-user').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const email = this.getAttribute('data-email');
+                        verifyUser(email);
+                    });
+                });
+                
+                document.querySelectorAll('.reject-user').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const email = this.getAttribute('data-email');
+                        rejectUser(email);
+                    });
+                });
+            }
+            
+            function loadAllUsers() {
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                if (users.length === 0) {
+                    allUsers.innerHTML = '<p>No users found.</p>';
+                    return;
+                }
+                
+                // Create HTML for each user
+                let html = '<table class="materials-table">';
+                html += `
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                users.forEach(user => {
+                    const status = user.verified === true ? 
+                        '<span style="color: green;">Verified</span>' : 
+                        '<span style="color: orange;">Pending</span>';
+                    
+                    html += `
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.role.charAt(0).toUpperCase() + user.role.slice(1)}</td>
+                            <td>${status}</td>
+                            <td class="action-buttons">
+                                ${user.verified !== true ? 
+                                    `<a href="#" class="verify-user" data-email="${user.email}" title="Verify User">
+                                        <i class="fas fa-check"></i>
+                                    </a>` : 
+                                    ''
+                                }
+                                <a href="#" class="delete-user" data-email="${user.email}" title="Delete User">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                allUsers.innerHTML = html;
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.verify-user').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const email = this.getAttribute('data-email');
+                        verifyUser(email);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-user').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const email = this.getAttribute('data-email');
+                        deleteUser(email);
+                    });
+                });
+            }
+            
+            function verifyUser(email) {
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                // Find and update user
+                const updatedUsers = users.map(user => {
+                    if (user.email === email) {
+                        return { ...user, verified: true };
+                    }
+                    return user;
+                });
+                
+                // Save back to localStorage
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+                
+                // Reload data
+                loadVerificationRequests();
+                loadAllUsers();
+                
+                // Show success message
+                alert(`User ${email} has been verified.`);
+            }
+            
+            function rejectUser(email) {
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                // Find and update user
+                const updatedUsers = users.map(user => {
+                    if (user.email === email) {
+                        return { ...user, role: 'student' };
+                    }
+                    return user;
+                });
+                
+                // Save back to localStorage
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+                
+                // Reload data
+                loadVerificationRequests();
+                loadAllUsers();
+                
+                // Show success message
+                alert(`User ${email} has been changed to student role.`);
+            }
+            
+            function deleteUser(email) {
+                if (!confirm(`Are you sure you want to delete user ${email}?`)) {
+                    return;
+                }
+                
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                // Find user to get their name before deletion
+                const userToDelete = users.find(user => user.email === email);
+                
+                if (!userToDelete) {
+                    alert('User not found.');
+                    return;
+                }
+                
+                // Filter out the user
+                const updatedUsers = users.filter(user => user.email !== email);
+                
+                // Save back to localStorage
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+                
+                // Delete all materials uploaded by this user
+                let materials = JSON.parse(localStorage.getItem('materials') || '[]');
+                const originalMaterialsCount = materials.length;
+                
+                // Filter out materials uploaded by this user
+                materials = materials.filter(material => 
+                    material.uploadedBy !== userToDelete.name
+                );
+                
+                // Save updated materials to localStorage
+                localStorage.setItem('materials', JSON.stringify(materials));
+                
+                const deletedMaterialsCount = originalMaterialsCount - materials.length;
+                
+                // Reload data
+                loadVerificationRequests();
+                loadAllUsers();
+                
+                // Show success message
+                alert(`User ${email} has been deleted along with ${deletedMaterialsCount} uploaded materials.`);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-access {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-info {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4285f4;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .access-code-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-radius: 4px;
+            border-left: 4px solid #7cb342;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="admin-access.html" class="active">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="admin-access">
+            <h2>Admin Access</h2>
+            
+            <div class="admin-info">
+                <p><i class="fas fa-info-circle"></i> This page provides access to the admin panel for managing users and content.</p>
+                <p>Enter the appropriate access code to manage student accounts and remove inappropriate content.</p>
+            </div>
+            
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="success-message" class="success-message" style="display: none;"></div>
+            
+            <form id="admin-access-form">
+                <div class="form-group">
+                    <label for="access-code">Access Code</label>
+                    <input type="password" id="access-code" class="form-control" required>
+                    <small class="form-text">Enter the admin access code provided by the system administrator.</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Access Admin Panel</button>
+            </form>
+            
+            <div class="access-code-container">
+                <h4>Available Access Codes:</h4>
+                <p><strong>Admin:</strong> ADMIN2023</p>
+                <p><strong>Teacher Moderator:</strong> TEACHER2023</p>
+                <p><small>Note: In a real system, these codes would not be displayed publicly.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminAccessForm = document.getElementById('admin-access-form');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            // Valid access codes - in a real app, these would be stored securely
+            const validAccessCodes = {
+                'ADMIN2023': 'admin',
+                'TEACHER2023': 'teacher_mod'
+            };
+            
+            if (adminAccessForm) {
+                adminAccessForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const accessCode = document.getElementById('access-code').value.toUpperCase();
+                    
+                    // Simple validation
+                    if (!accessCode) {
+                        showError('Please enter an access code.');
+                        return;
+                    }
+                    
+                    // Check if access code is valid
+                    if (!validAccessCodes[accessCode]) {
+                        showError('Invalid access code.');
+                        return;
+                    }
+                    
+                    // For admin code
+                    if (accessCode === 'ADMIN2023') {
+                        // Store admin session info
+                        sessionStorage.setItem('isAdmin', 'true');
+                        sessionStorage.setItem('adminRole', 'Administrator');
+                        
+                        // Redirect to admin panel
+                        showSuccess('Admin access granted! Redirecting to admin panel...');
+                        setTimeout(() => {
+                            window.location.href = 'admin.html';
+                        }, 1500);
+                        return;
+                    }
+                    
+                    // For teacher moderator code
+                    if (accessCode === 'TEACHER2023') {
+                        // Store moderator session info
+                        sessionStorage.setItem('isModerator', 'true');
+                        sessionStorage.setItem('moderatorRole', 'Teacher Moderator');
+                        
+                        // Redirect to admin panel
+                        showSuccess('Teacher moderator access granted! Redirecting to admin panel...');
+                        setTimeout(() => {
+                            window.location.href = 'admin.html';
+                        }, 1500);
+                        return;
+                    }
+                });
+            }
+            
+            function showError(message) {
+                if (errorMessage) {
+                    errorMessage.textContent = message;
+                    errorMessage.style.display = 'block';
+                    
+                    // Hide error after 3 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+            
+            function showSuccess(message) {
+                if (successMessage) {
+                    successMessage.textContent = message;
+                    successMessage.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

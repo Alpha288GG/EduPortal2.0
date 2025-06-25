@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PYQ - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="materials.html">Study Materials</a></li>
+                    <li><a href="upload.html">Upload Materials</a></li>
+                    <li><a href="teacher-upload-pyq.html" class="active">Upload PYQ</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="upload-section">
+        <div class="container">
+            <h2 class="section-title">Upload Previous Year Questions</h2>
+            <div class="form-container">
+                <form id="pyqUploadForm">
+                    <div class="form-group">
+                        <label for="pyqTitle">Title</label>
+                        <input type="text" id="pyqTitle" class="form-control" required placeholder="Enter PYQ title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pyqYear">Year</label>
+                        <select id="pyqYear" class="form-control" required>
+                            <option value="">Select Year</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pyqFile">Upload PDF File</label>
+                        <input type="file" id="pyqFile" class="form-control" accept=".pdf" required>
+                        <small class="form-text">Only PDF files are allowed. Maximum size: 10MB</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Upload PYQ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+            <p>&copy; Created by Swapnil Shinde</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html> 

@@ -1,0 +1,57 @@
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="dashboard-grid">
+                <aside class="sidebar">
+                    <div class="user-info">
+                        <h3 id="user-name">Teacher Name</h3>
+                        <p id="user-role">Teacher</p>
+                    </div>
+                    <nav class="dashboard-nav">
+                        <ul>
+                            <li><a href="teacher-dashboard.html" class="active">Dashboard</a></li>
+                            <li><a href="teacher-upload-pyq.html">Upload PYQs</a></li>
+                            <li><a href="teacher-materials.html">Study Materials</a></li>
+                            <li><a href="logout.html">Logout</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <main class="main-content">
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="action-buttons">
+                            <a href="upload.html" class="btn btn-primary">
+                                <i class="fas fa-upload"></i> Upload Study Material
+                            </a>
+                            <a href="teacher-upload-pyq.html" class="btn btn-primary">
+                                <i class="fas fa-file-alt"></i> Upload PYQ
+                            </a>
+                            <a href="teacher-materials.html" class="btn btn-secondary">
+                                <i class="fas fa-book"></i> Manage Materials
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Study Materials</h3>
+                            <p id="study-materials-count">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <h3>PYQs</h3>
+                            <p id="pyq-count">0</p>
+                        </div>
+                    </div>
+
+                    <div class="recent-materials">
+                        <h2>Recent Uploads</h2>
+                        <div class="materials-list">
+                            <!-- Recent uploads will be displayed here -->
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section> 

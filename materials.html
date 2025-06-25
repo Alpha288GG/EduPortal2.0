@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <aside class="sidebar">
+                    <div class="user-info">
+                        <h3 id="user-name">John Doe</h3>
+                        <p id="user-role">Student</p>
+                    </div>
+                    
+                    <div class="sidebar-menu">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="materials.html" class="active">Study Materials</a></li>
+                            <li id="upload-link" style="display: none;"><a href="upload.html">Upload Materials</a></li>
+                            <li id="subjects-link" style="display: none;"><a href="subjects.html">Manage Subjects</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-menu">
+                        <h3>Filter by Category</h3>
+                        <ul id="category-filters">
+                            <li><a href="#" data-category="all" class="active">All Materials</a></li>
+                            <li><a href="#" data-category="notes">Notes</a></li>
+                            <li><a href="#" data-category="ct1">Class Test 1</a></li>
+                            <li><a href="#" data-category="ct2">Class Test 2</a></li>
+                            <li><a href="#" data-category="midsem">Mid-Semester</a></li>
+                            <li><a href="#" data-category="endsem">End-Semester</a></li>
+                            <li><a href="#" data-category="youtube">YouTube Links</a></li>
+                            <li><a href="#" data-category="other">Other</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                
+                <main class="main-content">
+                    <div class="dashboard-header">
+                        <h2>Study Materials</h2>
+                        <div class="search-container">
+                            <input type="text" id="search-materials" class="form-control" placeholder="Search materials...">
+                        </div>
+                    </div>
+                    
+                    <div class="academic-selection">
+                        <div class="form-group">
+                            <label for="academic-year">Academic Year</label>
+                            <select id="academic-year" class="form-control">
+                                <option value="">Select Academic Year</option>
+                                <option value="first-year">First Year</option>
+                                <option value="second-year">Second Year</option>
+                                <option value="third-year">Third Year</option>
+                                <option value="final-year">Final Year</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select id="semester" class="form-control" disabled>
+                                <option value="">Select Semester</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" class="form-control" disabled>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="materials-list">
+                        <h3 id="recent-materials-heading">Recently Uploaded</h3>
+                        <div id="recent-materials-container" class="materials-grid"></div>
+                        <h3 id="materials-heading">All Materials</h3>
+                        
+                        <div id="materials-container" class="materials-grid">
+                            <!-- Materials will be loaded here dynamically -->
+                        </div>
+                        
+                        <div id="no-materials" style="display: none; text-align: center; padding: 30px;">
+                            <p>No materials found for the selected criteria.</p>
+                        </div>
+                        
+                        <div class="pagination">
+                            <button id="prev-page" class="btn btn-sm" disabled>&laquo; Previous</button>
+                            <span id="page-info">Page 1 of 1</span>
+                            <button id="next-page" class="btn btn-sm" disabled>Next &raquo;</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/mobile-preview.js"></script>
+    <script src="js/materials.js"></script>
+</body>
+</html>

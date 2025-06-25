@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PYQs - Admin Panel</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <li><a href="admin-upload-pyq.html" class="active">Upload PYQs</a></li>
+                    <li><a href="logout.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="upload-section">
+        <div class="container">
+            <h2 class="section-title">Upload Previous Year Questions</h2>
+            
+            <div class="form-container">
+                <form id="pyqUploadForm" class="upload-form">
+                    <div class="form-group">
+                        <label for="academicYear">Academic Year</label>
+                        <select id="academicYear" name="academicYear" class="form-control" required>
+                            <option value="">Select Year</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="examType">Exam Type</label>
+                        <select id="examType" name="examType" class="form-control" required>
+                            <option value="">Select Exam Type</option>
+                            <option value="midsem">Mid-Semester</option>
+                            <option value="endsem">End-Semester</option>
+                            <option value="ct1">Class Test 1</option>
+                            <option value="ct2">Class Test 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" class="form-control" required>
+                            <option value="">Select Subject</option>
+                            <option value="math">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="computer">Computer Science</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select id="semester" name="semester" class="form-control" required>
+                            <option value="">Select Semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pyqFile">Upload PYQ File (PDF)</label>
+                        <input type="file" id="pyqFile" name="pyqFile" class="form-control" accept=".pdf" required>
+                        <small class="form-text">Only PDF files are allowed. Maximum size: 10MB</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter a brief description of the question paper"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Upload PYQ</button>
+                </form>
+            </div>
+
+            <div class="uploaded-pyqs">
+                <h3>Recently Uploaded PYQs</h3>
+                <div class="pyq-list">
+                    <!-- Uploaded PYQs will be listed here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

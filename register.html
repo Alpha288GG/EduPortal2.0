@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Academic Portal</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html" class="active">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Create an Account</h2>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required minlength="6">
+                    <small class="form-text">Password must be at least 6 characters long</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>I am a:</label>
+                    <div class="form-check">
+                        <input type="radio" id="student" name="role" value="student" checked>
+                        <label for="student">Student</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="teacher" name="role" value="teacher">
+                        <label for="teacher">Teacher</label>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="teacher-code-container" style="display: none;">
+                    <label for="teacher-code">Teacher Verification Code</label>
+                    <input type="text" id="teacher-code" class="form-control">
+                    <small class="form-text">This code is provided by the administration to verify your teacher status.</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="register-btn">Register</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/register.js"></script>
+</body>
+</html> 

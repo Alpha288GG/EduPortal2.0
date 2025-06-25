@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EDU PORTAL FOR ACADEMIA</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="admin-access.html">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome to the Edu Portal for Academia</h2>
+                <p>A platform for teachers to share study materials and students to access them</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                    <a href="register.html" class="btn btn-secondary">Register</a>
+                    <a href="pyq-access.html" class="btn btn-primary">Access PYQs</a>
+                    <a href="teacher-upload-pyq.html" class="btn btn-secondary" id="teacherUploadBtn" style="display: none;">
+                        <i class="fas fa-upload"></i> Upload PYQ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pyq-section">
+        <div class="container">
+            <h2 class="section-title">Previous Year Questions</h2>
+            <div class="pyq-grid" id="pyqList">
+                <!-- PYQs will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Study Materials</h3>
+                    <p>Access study materials organized by academic year, semester, and subject</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Role-Based Access</h3>
+                    <p>Different features for teachers and students</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>Easy Uploads</h3>
+                    <p>Teachers can easily upload various file types</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access materials on any device</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create an Account</h3>
+                    <p>Register as a teacher or student</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Academic Year & Semester</h3>
+                    <p>Choose your academic year and semester</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Access or Upload Materials</h3>
+                    <p>Teachers upload, students download</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+            <P>&copy;; Created by Swapnil Shinde</P>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

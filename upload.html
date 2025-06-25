@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Materials - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Academic Portal</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="materials.html">Study Materials</a></li>
+                    <li><a href="upload.html" class="active">Upload Materials</a></li>
+                    <li><a href="teacher-upload-pyq.html">Upload PYQ</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <aside class="sidebar">
+                    <div class="user-info">
+                        <h3 id="user-name">John Doe</h3>
+                        <p id="user-role">Teacher</p>
+                    </div>
+                    
+                    <div class="sidebar-menu">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="materials.html">Study Materials</a></li>
+                            <li id="upload-link"><a href="upload.html" class="active">Upload Materials</a></li>
+                            <li id="pyq-upload-link"><a href="teacher-upload-pyq.html">Upload PYQ</a></li>
+                            <li id="subjects-link"><a href="subjects.html">Manage Subjects</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                
+                <main class="main-content">
+                    <div class="dashboard-header">
+                        <h2>Upload Study Materials</h2>
+                        <div class="upload-type-selector">
+                            <a href="upload.html" class="btn btn-primary active">Study Materials</a>
+                            <a href="teacher-upload-pyq.html" class="btn btn-secondary">Upload PYQ</a>
+                        </div>
+                    </div>
+                    
+                    <div id="error-message" class="error-message" style="display: none;"></div>
+                    <div id="success-message" class="success-message" style="display: none;"></div>
+                    
+                    <form id="upload-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Title/Description</label>
+                            <input type="text" id="title" name="title" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="academic-year">Academic Year</label>
+                            <select id="academic-year" name="academicYear" class="form-control" required>
+                                <option value="">Select Academic Year</option>
+                                <option value="first-year">First Year</option>
+                                <option value="second-year">Second Year</option>
+                                <option value="third-year">Third Year</option>
+                                <option value="final-year">Final Year</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select id="semester" name="semester" class="form-control" required disabled>
+                                <option value="">Select Semester</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" class="form-control" required disabled>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="notes">Notes</option>
+                                <option value="ct1">Class Test 1</option>
+                                <option value="ct2">Class Test 2</option>
+                                <option value="midsem">Mid-Semester</option>
+                                <option value="endsem">End-Semester</option>
+                                <option value="youtube">YouTube Links</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="file">Upload File</label>
+                            <input type="file" id="file" name="file" class="form-control" required>
+                            <small class="form-text">Allowed file types: PDF, PPT, DOC, DOCX, JPG, PNG, ZIP (Max size: 10MB)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Additional Description (Optional)</label>
+                            <textarea id="description" name="description" class="form-control" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" id="upload-btn">Upload Material</button>
+                    </form>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

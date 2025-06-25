@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Academic Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Academic Portal</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <aside class="sidebar">
+                    <div class="user-info">
+                        <h3 id="user-name">John Doe</h3>
+                        <p id="user-role">Teacher</p>
+                    </div>
+                    
+                    <div class="sidebar-menu">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                            <li><a href="materials.html">Study Materials</a></li>
+                            <li id="upload-link" style="display: none;"><a href="upload.html">Upload Materials</a></li>
+                            <li id="subjects-link" style="display: none;"><a href="subjects.html">Manage Subjects</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="mobile-guide.html"><i class="fas fa-mobile-alt"></i> Mobile Guide</a></li>
+                            <li id="admin-link" style="display: none;"><a href="admin.html"><i class="fas fa-shield-alt"></i> Admin Panel</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                
+                <main class="main-content">
+                    <div class="dashboard-header">
+                        <h2>Dashboard</h2>
+                        <div id="welcome-message">Welcome, <span id="user-greeting">John</span>!</div>
+                    </div>
+                    
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <h3 id="materials-count">0</h3>
+                                <p>Study Materials</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <h3 id="subjects-count">0</h3>
+                                <p>Subjects</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <h3 id="recent-uploads">0</h3>
+                                <p>Recent Uploads</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="academic-selection">
+                        <h3>Select Academic Year & Semester</h3>
+                        <div class="form-group">
+                            <label for="academic-year">Academic Year</label>
+                            <select id="academic-year" class="form-control">
+                                <option value="">Select Academic Year</option>
+                                <option value="first-year">First Year</option>
+                                <option value="second-year">Second Year</option>
+                                <option value="third-year">Third Year</option>
+                                <option value="final-year">Final Year</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select id="semester" class="form-control" disabled>
+                                <option value="">Select Semester</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" class="form-control" disabled>
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+                        
+                        <button id="view-materials-btn" class="btn btn-primary" disabled>View Materials</button>
+                    </div>
+                    
+                    <div class="recent-materials">
+                        <h3>Recently Added Materials</h3>
+                        <table class="materials-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Subject</th>
+                                    <th>Category</th>
+                                    <th>Uploaded On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-materials-list">
+                                <tr>
+                                    <td colspan="5" class="text-center">No materials available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Academic Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 
